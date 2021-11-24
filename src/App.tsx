@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./components/header";
+import ContactList from "./components/contact-list";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "./redux/actions/address";
+import { useEffect } from "react";
 
 function App() {
+  const dispatch = useDispatch();
+  const contacts = useSelector((state: any) => state.address.contacts);
+  
+  
+  useEffect(() => {
+    dispatch(actions.findAllContacts());
+  }, []);
+  
+  const handleSearch = (key: any) => {
+    dispatch(
+      actions.searchByString(key)
+    );
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header search={handleSearch} />
+      <ContactList contacts={contacts} />
     </div>
   );
 }

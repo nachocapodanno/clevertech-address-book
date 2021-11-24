@@ -1,0 +1,2 @@
+export const SEARCH_BY_STRING = 'SEARCH_BY_STRING';
+export const FIND_ALL_CONTACTS = 'FIND_ALL_CONTACTS';
